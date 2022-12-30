@@ -1,30 +1,44 @@
 let currentInput = [];
 function createApp() {
     let container = document.createElement('div');
+    let header = document.createElement('div');
     let logoBlock = document.createElement('div');
-    let placeholderBlock = document.createElement('div');
-    let inputsBlock = document.createElement('div');
-    let result = document.createElement('div');
+    let workSpace = document.createElement('div');
+    let contentBlock = document.createElement('div');
+    let controlBlock = document.createElement('div');
 
-    let logo = document.createElement('h1');
+    let logo = document.createElement('img');
     let length = document.createElement('h5');
     let all = document.createElement('button');
     let active = document.createElement('button');
     let completed = document.createElement('button');
     let clearActive = document.createElement('button');
-    let placeholder = document.createElement('input');
+    let placeholder = document.createElement('div');
+    let inputBlock = document.createElement('div');
+    let input = document.createElement('input');
+    let plusIcon = document.createElement('div');
 
-    logo.innerText = 'toDoList';
-    all.innerText = 'Всё';
-    active.innerText = 'Активные';
-    completed.innerText = 'Выполненные';
-    clearActive.innerText = 'Удалить выполненные';
-    placeholder.placeholder = 'Чем ты хочешь сегодня заняться?';
+    logo.src = '/img/logo.png';
+    all.innerText = 'All tasks';
+    active.innerText = 'Active tasks';
+    completed.innerText = 'Completed tasks';
+    clearActive.innerText = 'Delete all completed tasks';
+    input.input = 'Plz, type your plans for today. After that push ENTER. Have a nice day (≧◡≦)';
+    plusIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    </svg>`;
     
-    container.classList = 'container';
-    inputsBlock.classList = 'inputsBlock';
-    logoBlock.classList = 'text-center';
-    placeholder.classList = 'form-control placeholder';
+    container.classList = 'container min-vh-100 d-flex flex-column justify-content-lg-between';
+    header.classList = 'header row gap-2';
+    workSpace.classList = 'workSpace row vh-75';
+    contentBlock.classList = 'contentBlock h-100 col-9 order-md-2 overflow-auto';
+    controlBlock.classList = 'controlBlock h-75 h-auto col-3 order-md-1 d-flex flex-column gap-1'
+    logoBlock.classList = 'col-12 logo h-50 d-flex justify-content-center';
+    placeholder.classList = 'row';
+    inputBlock.classList = 'col-custom-11-5';
+    input.classList = 'main-input form-control input mb-1';
+    plusIcon.classList = 'd-flex justify-content-end align-items-center fa-2x col-custom-0-5';
     length.classList = 'length';
     all.classList = 'btn btn-dark';
     active.classList = 'btn btn-primary';
@@ -33,7 +47,7 @@ function createApp() {
 
     let id = function () {
         return '_' + Math.random().toString(36).substr(2, 9);
-      };
+    };   
 
     function CreateNewToDo({id, value, checkeed}){
         let block = document.createElement('div');
@@ -44,10 +58,10 @@ function createApp() {
         let text = document.createElement('span'); 
         let delBtn = document.createElement('a');
 
-        block.classList = 'row align-items-center data';
-        checkBlock.classList = 'col text-star';
-        textBlock.classList = 'col text-center';
-        delBtnBlock.classList = 'col text-end';
+        block.classList = 'row align-items-center data border rounded m-3';
+        checkBlock.classList = 'col-2 text-star';
+        textBlock.classList = 'col-8 text-center text-truncate';
+        delBtnBlock.classList = 'col-2 text-end';
         check.classList = 'form-check-input';
         text.classList = `value`;
 
@@ -56,12 +70,12 @@ function createApp() {
             check.checked = true;    
         }
         text.innerText = `${value}`;
-        delBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        delBtn.innerHTML = `<i class="bi bi-trash fs-2"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-        </svg>`;
+      </svg></i>`;
 
-        inputsBlock.appendChild(block);
+        contentBlock.appendChild(block);
         block.appendChild(checkBlock);
         block.appendChild(textBlock);
         block.appendChild(delBtnBlock);
@@ -73,13 +87,12 @@ function createApp() {
             currentInput.map((item, i)=>{
             if (item.id == id) {
                 let index = item.id;
-                console.log(index);
                 currentInput.splice(i, 1);
                 localStorage.clear();
                 localStorage.setItem('array', JSON.stringify(currentInput))   
             }}
             )
-            inputsBlock.innerHTML = ``;
+            contentBlock.innerHTML = ``;
             location.hash = '#all';
             checkLength();
             currentInput.map((item) => {CreateNewToDo(item)});
@@ -98,55 +111,64 @@ function createApp() {
                 localStorage.clear();
                 localStorage.setItem("array", JSON.stringify(currentInput));
             });
-        placeholder.value = ``;
+        input.value = ``;
     }
 
-
-    function pushArr(item){
-        currentInput.push({id: item.id, checkeed: item.checkeed, value: item.value,}); 
-    }
 
     function checkLength() {
         if(currentInput.length > 0){
             let i = 0;
-            result.appendChild(all);
-            result.appendChild(active);
-            result.appendChild(completed);
-            result.appendChild(clearActive);
-            result.style.display = 'block';
-            
+            workSpace.style.display = 'flex';
             currentInput.forEach((item) => {
                 if(item.checkeed == 'yes'){
                     i++;
                 };
                 return i 
             })
-            length.innerText = `Количество дел: ${currentInput.length - i}`;
+            length.innerText = `Total tasks amount: ${currentInput.length - i}`;
         } else {
-            result.style.display = 'none';
+            workSpace.style.display = 'none';
         }
     }
     
-    placeholder.addEventListener('keydown', function creatInput(e) {
+    input.addEventListener('keydown', (e) => {
         if (e.keyCode === 13) {
-            let variable = {id:id(), checkeed: 'not', value: placeholder.value,};
-            pushArr(variable);
+            if(input.value !== '') {
+                let variable = {id:id(), checkeed: 'not', value: input.value,};
+                currentInput.push(variable);
+                localStorage.setItem("array", JSON.stringify(currentInput));
+                checkLength();
+                if(location.hash === '#all' || location.hash === ''){
+                CreateNewToDo(variable);
+                }
+            } else {
+                alert('Your placeholder is empty! Plz fill it and everything will be OK (︶ω︶)');
+            }
+        } 
+    })
+
+    plusIcon.addEventListener('click', () => {
+        if(input.value !== '') {
+            let variable = {id:id(), checkeed: 'not', value: input.value,};
+            currentInput.push(variable);
             localStorage.setItem("array", JSON.stringify(currentInput));
             checkLength();
-            if(location.hash === '#all'){
+            if(location.hash === '#all' || location.hash === ''){
             CreateNewToDo(variable);
             }
+        } else {
+            alert('Your placeholder is empty! Plz fill it and everything will be OK (︶ω︶)');
         }
     })
 
     all.onclick = () => {
-        inputsBlock.innerHTML = ``;
+        contentBlock.innerHTML = ``;
         location.hash = '#all';
         currentInput.map((item) => {CreateNewToDo(item)})
     }
 
     active.onclick = () => {
-        inputsBlock.innerHTML = ``;
+        contentBlock.innerHTML = ``;
         location.hash = '#active';
         currentInput.map((item) => {
             if(item.checkeed == 'not'){
@@ -156,7 +178,7 @@ function createApp() {
     }
 
     completed.onclick = () => {
-        inputsBlock.innerHTML = ``;
+        contentBlock.innerHTML = ``;
         location.hash = '#completed';
         currentInput.map((item) => {
             if(item.checkeed == 'yes'){
@@ -182,21 +204,29 @@ function createApp() {
                     localStorage.setItem('array', JSON.stringify(currentInput))
                 }
             }
-            inputsBlock.innerHTML = ``;
+            contentBlock.innerHTML = ``;
             currentInput.map((item) => {CreateNewToDo(item)})
         }
         checkLength()
         location.hash = '#all';
     }
 
-    document.body.appendChild(container);
-    container.appendChild(logoBlock);
-    container.appendChild(placeholderBlock);
-    container.appendChild(inputsBlock);
-    container.appendChild(result);
-    result.appendChild(length);
+    document.querySelector('.root').appendChild(container);
+    container.appendChild(header);
+    header.appendChild(logoBlock);
+    header.appendChild(placeholder);
+    placeholder.appendChild(inputBlock);
+    inputBlock.appendChild(input);
+    placeholder.appendChild(plusIcon);
     logoBlock.appendChild(logo);
-    placeholderBlock.appendChild(placeholder);
+    container.appendChild(workSpace);
+    workSpace.appendChild(contentBlock);
+    workSpace.appendChild(controlBlock);
+    controlBlock.appendChild(length);
+    controlBlock.appendChild(all);
+    controlBlock.appendChild(active);
+    controlBlock.appendChild(completed);
+    controlBlock.appendChild(clearActive);
 
     let reloaded  = function(){
         currentInput = JSON.parse(localStorage.getItem('array'));
