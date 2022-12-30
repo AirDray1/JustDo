@@ -18,7 +18,7 @@ function createApp() {
     let input = document.createElement('input');
     let plusIcon = document.createElement('div');
 
-    logo.src = '/img/logo.png';
+    logo.src = './img/logo.png';
     all.innerText = 'All tasks';
     active.innerText = 'Active tasks';
     completed.innerText = 'Completed tasks';
