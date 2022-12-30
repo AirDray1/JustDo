@@ -228,20 +228,20 @@ function createApp() {
     controlBlock.appendChild(completed);
     controlBlock.appendChild(clearActive);
 
-    let reloaded  = function(){
-        currentInput = JSON.parse(localStorage.getItem('array'));
-        currentInput.map((item) => {CreateNewToDo(item)});
-        checkLength()
-    } //страницу перезагрузили
+    // let reloaded  = function(){
+    //     currentInput = JSON.parse(localStorage.getItem('array'));
+    //     currentInput.map((item) => {CreateNewToDo(item)});
+    //     checkLength()
+    // } 
 
-    window.onload = function() {
-    let loaded = localStorage.getItem('loaded');
-    if(loaded) {
-        reloaded();
-    } else {
-        localStorage.setItem('loaded', true);
-    }
-    }
+    // window.onload = function() {
+    // let loaded = localStorage.getItem('loaded');
+    // if(loaded) {
+    //     reloaded();
+    // } else {
+    //     localStorage.setItem('loaded', true);
+    // }
+    // }
 };
 
 
